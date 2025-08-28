@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+        
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #051F20 0%, #0a3532 100%);
+    padding: 15px; /* Menambahkan padding agar tidak menempel di tepi layar kecil */
+}
+
+.login-container {
+    background: white;
+    padding: 40px 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+    border-top: 5px solid #4a9b8e; /* Menambahkan aksen warna tema */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-header {
+    margin-bottom: 25px;
+}
+
+.login-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.login-subtitle {
+    font-size: 14px;
+    color: #777;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #adb5bd;
+    font-size: 14px;
+    transition: color 0.3s ease; /* Transisi untuk warna ikon */
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+/* Efek saat input di-fokus */
+.form-input:focus {
+    outline: none;
+    border-color: #4a9b8e;
+    box-shadow: 0 0 0 3px rgba(74, 155, 142, 0.2);
+}
+/* Warna ikon juga berubah saat input di-fokus */
+.form-input:focus ~ .input-icon {
+    color: #4a9b8e;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #051F20;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-login:hover {
+    background-color: #0a3d40;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: left;
+    display: flex; /* Menambahkan flexbox untuk ikon */
+    align-items: center;
+    gap: 10px;
+}
+
+/* Tambahkan CSS ini ke login_admin.css */
+
+/* Password toggle button styling */
+.password-toggle-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #adb5bd;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle-btn:hover {
+    color: #4a9b8e;
+    background-color: rgba(74, 155, 142, 0.1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.password-toggle-btn:focus {
+    outline: 2px solid #4a9b8e;
+    outline-offset: 2px;
+    color: #4a9b8e;
+}
+
+/* Adjust padding untuk input password agar tidak tertutup toggle button */
+.input-group input[type="password"],
+.input-group input[type="text"][name="password"] {
+    padding-right: 45px;
+}
+
+/* Icon styling */
+.password-toggle-btn i {
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.password-toggle-btn i.fa-eye-slash {
+    color: #4a9b8e;
+}
+
+/* Animation untuk icon change */
+.password-toggle-btn i {
+    transition: transform 0.2s ease;
+}
+
+.password-toggle-btn:active i {
+    transform: scale(0.9);
+}

@@ -1,0 +1,56 @@
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Virtual Lab</h2>
+            <p>dashboard_Dosen</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-item">
+                <a href="dashboard_dosen.php" class="nav-link" id="nav-dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="manajemen_reservasi.php" class="nav-link" id="nav-reservasi">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Manajemen Reservasi</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="manajemen_mahasiswa.php" class="nav-link" id="nav-mahasiswa">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Manajemen Mahasiswa</span>
+                    <?php if (isset($pending_count) && $pending_count > 0): ?>
+                        <span class="notification-badge"><?php echo $pending_count; ?></span>
+                    <?php endif; ?>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="manajemen_tugas.php" class="nav-link" id="nav-tugas">
+                    <i class="fas fa-tasks"></i>
+                    <span>Manajemen Tugas</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="penilaian_tugas.php" class="nav-link" id="nav-penilaian">
+                    <i class="fas fa-edit"></i>
+                    <span>Penilaian Tugas</span>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="manajemen_matakuliah.php" class="nav-link" id="nav-matkul">
+                    <i class="fas fa-book"></i>
+                    <span>Manajemen Matkul</span>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../logout.php" class="logout-btn" onclick="return confirm('Yakin ingin logout?')">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
