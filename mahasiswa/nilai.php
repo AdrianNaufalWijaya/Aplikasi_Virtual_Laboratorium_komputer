@@ -61,26 +61,44 @@ function getGradedSubmissions($pdo, $user_id) {
 }
 
 // Function to get course statistics
+// Function to get course statistics
 function getCourseStatistics($pdo, $user_id) {
     $sql = "
         SELECT 
             c.course_id, c.nama_matkul, c.kode_matkul, c.semester, u.full_name as dosen_name,
-            COUNT(s.submission_id) as total_graded, ROUND(AVG(s.score), 2) as average_score,
-            SUM(s.score) as total_score, SUM(a.max_score) as total_max_score,
-            MIN(s.score) as min_score, MAX(s.score) as max_score
+            
+            -- Menghitung total tugas yang sudah dinilai untuk mahasiswa ini di matkul ini
+            (SELECT COUNT(s.submission_id) 
+             FROM submission s
+             JOIN assignment a_sub ON s.id_tugas = a_sub.assignment_id
+             WHERE a_sub.id_matkul = c.course_id AND s.id_mahasiswa = :user_id1 AND s.status = 'graded') as total_graded,
+            
+            -- Menghitung total tugas yang pernah dipublikasikan di matkul ini
+            (SELECT COUNT(a_total.assignment_id) 
+             FROM assignment a_total 
+             WHERE a_total.id_matkul = c.course_id AND a_total.status = 'published') as total_assignments_published,
+
+            -- Kalkulasi skor yang sudah ada
+            ROUND(AVG(s.score), 2) as average_score,
+            SUM(s.score) as total_score, 
+            SUM(a.max_score) as total_max_score,
+            MIN(s.score) as min_score, 
+            MAX(s.score) as max_score
+            
         FROM course c
         INNER JOIN enrollment e ON c.course_id = e.course_id
         INNER JOIN users u ON c.id_dosen = u.user_id
         LEFT JOIN assignment a ON c.course_id = a.id_matkul AND a.status = 'published'
-        LEFT JOIN submission s ON a.assignment_id = s.id_tugas AND s.id_mahasiswa = ? AND s.status = 'graded'
-        WHERE e.user_id = ? AND e.status = 'approved' AND c.status = 'active'
+        LEFT JOIN submission s ON a.assignment_id = s.id_tugas AND s.id_mahasiswa = :user_id2 AND s.status = 'graded'
+        WHERE e.user_id = :user_id3 AND e.status = 'approved' AND c.status = 'active'
         GROUP BY c.course_id, c.nama_matkul, c.kode_matkul, c.semester, u.full_name
         HAVING total_graded > 0
         ORDER BY c.nama_matkul ASC
     ";
     
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$user_id, $user_id]);
+    // Kita perlu bind user_id tiga kali karena digunakan di subquery dan klausa WHERE utama
+    $stmt->execute(['user_id1' => $user_id, 'user_id2' => $user_id, 'user_id3' => $user_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -189,10 +207,6 @@ if (!empty($gradedSubmissions)) {
                         <div class="stat-number"><?php echo $overallStats['total_assignments']; ?></div>
                         <div class="stat-label">Tugas Dinilai</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number"><?php echo $overallStats['total_score']; ?>/<?php echo $overallStats['total_max_score']; ?></div>
-                        <div class="stat-label">Total Poin</div>
-                    </div>
                 </div>
             </div>
             <?php endif; ?>
@@ -220,11 +234,15 @@ if (!empty($gradedSubmissions)) {
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-15">
-                                     <div class="info-item"><i class="fas fa-chalkboard-teacher"></i><?php echo htmlspecialchars($course['dosen_name']); ?></div>
-                                     <div style="text-align: right;">
-                                        <div style="font-size: 24px; font-weight: 700; color: <?php echo $gradeColor; ?>"><?php echo $percentage; ?>%</div>
-                                        <div style="font-size: 12px;"><?php echo $course['total_graded']; ?> tugas dinilai</div>
-                                     </div>
+                                     <div class="info-item">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <span><?php echo htmlspecialchars($course['dosen_name']); ?></span>
+                                </div>
+                                
+                                <div style="text-align: right;">
+                                    <div style="font-size: 24px; font-weight: 700; color: <?php echo $gradeColor; ?>"><?php echo $percentage; ?>%</div>
+                                    <div style="font-size: 12px;"><?php echo $course['total_graded']; ?> / <?php echo $course['total_assignments_published']; ?> tugas dinilai</div>
+                                </div>
                                 </div>
                                 <div class="stats-grid" style="gap: 10px;">
                                     <div class="stat-card" style="padding: 10px; border-width: 2px;">

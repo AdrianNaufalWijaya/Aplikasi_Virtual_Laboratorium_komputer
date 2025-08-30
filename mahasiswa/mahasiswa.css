@@ -20,14 +20,14 @@ body {
 
 /* ============= SIDEBAR STYLES ============= */
 .sidebar {
-    width: 240px;
+    width: 250px;
     background: linear-gradient(180deg, #051F20 0%, #0a3532 100%);
     color: #fff;
     min-height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
     z-index: 1000;
     box-shadow: 3px 0 15px rgba(5, 31, 32, 0.2);
 }
@@ -72,7 +72,7 @@ body {
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
     border-radius: 10px;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     position: relative;
     overflow: hidden;
     font-weight: 500;
@@ -131,7 +131,7 @@ body {
 /* ============= TOP NAVIGATION ============= */
 .top-nav {
     background: #ffffff;
-    padding: 0 25px;
+    padding: 0 23px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -347,7 +347,7 @@ body {
 
 /* ============= CONTENT AREA ============= */
 .content-area {
-    padding: 20px;
+    padding: 15px;
 }
 
 /* ============= CONTENT HEADER (Welcome Card) ============= */
@@ -384,23 +384,23 @@ body {
 .welcome-text h1 {
     font-size: 26px;
     font-weight: 700;
-    margin-bottom: 6px;
     color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 5px;
 }
 
 .welcome-text p {
     font-size: 15px;
     opacity: 0.95;
     margin: 0;
+    opacity: 0.9;
+    font-size: 16px;
 }
 
 .welcome-stats {
     display: flex;
-    gap: 25px;
+    gap: 20px;
     margin-top: 20px;
-}
-
-.welcome-stat {
     text-align: center;
 }
 
@@ -432,19 +432,20 @@ body {
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 25px;
 }
 
 .stat-card {
     background: white;
-    padding: 20px;
+    padding: 15px;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
     border-left: 4px solid #051F20;
     position: relative;
     overflow: hidden;
+    gap: 15px;
 }
 
 .stat-card::before {
@@ -452,8 +453,8 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     background: linear-gradient(135deg, rgba(5, 31, 32, 0.08), transparent);
     border-radius: 0 0 0 60px;
 }
@@ -508,7 +509,7 @@ body {
 .section {
     background: white;
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
     margin-bottom: 20px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
@@ -641,7 +642,7 @@ body {
     gap: 8px;
     font-size: 13px;
     color: #555;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .info-item i {
@@ -959,7 +960,7 @@ body {
     }
 
     .page-title {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .nav-right {
@@ -985,13 +986,6 @@ body {
         text-align: center;
     }
 
-    .welcome-text h1 {
-        font-size: 20px;
-    }
-
-    .welcome-text p {
-        font-size: 14px;
-    }
 
     .welcome-stats {
         flex-direction: column;
@@ -1048,14 +1042,6 @@ body {
     .content-header {
         padding: 15px 12px;
         border-radius: 10px;
-    }
-
-    .welcome-text h1 {
-        font-size: 18px;
-    }
-
-    .welcome-text p {
-        font-size: 13px;
     }
 
     .stat-card {
@@ -1810,17 +1796,6 @@ body {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .welcome-text h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .welcome-text p {
-            opacity: 0.9;
-            font-size: 16px;
         }
 
         .current-time {

@@ -74,8 +74,18 @@ $pending_count = $stmt_pending->fetch(PDO::FETCH_ASSOC)['total'];
 
     <div class="main-content">
         <header class="header">
-            <h1>Selamat Datang, <?php echo htmlspecialchars($full_name); ?>!</h1>
-            <p style="color: #6c757d;">Berikut adalah ringkasan aktivitas di Virtual Laboratory.</p>
+            <div> <h1>Selamat Datang, <?php echo htmlspecialchars($full_name); ?>!</h1>
+                <p style="color: #6c757d;">Berikut adalah ringkasan aktivitas di Virtual Laboratory.</p>
+            </div>
+            
+            <div class="header-right">
+                <div class="notifications" id="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge-count" id="notification-count" style="display: none;">0</span>
+                </div>
+                <div class="notification-panel" id="notification-panel">
+                    </div>
+            </div>
         </header>
 
         <div class="stats-grid">
@@ -139,8 +149,83 @@ $pending_count = $stmt_pending->fetch(PDO::FETCH_ASSOC)['total'];
             </div>
         </div>
     </div>
-    <script>
+    
+     <script>
         document.getElementById('nav-dashboard').classList.add('active');
+
+        // --- SCRIPT NOTIFIKASI ---
+        const bell = document.getElementById('notification-bell');
+        const panel = document.getElementById('notification-panel');
+        const countBadge = document.getElementById('notification-count');
+
+        // Fungsi untuk mengambil dan menampilkan notifikasi
+        function fetchNotifications() {
+            fetch('get_notifications.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Update badge count
+                    if (data.unread_count > 0) {
+                        countBadge.textContent = data.unread_count;
+                        countBadge.style.display = 'flex';
+                    } else {
+                        countBadge.style.display = 'none';
+                    }
+
+                    // Buat panel notifikasi
+                    let panelHTML = '<div class="notification-header"><h4>Notifikasi</h4></div><div class="notification-list">';
+                    if (data.notifications.length > 0) {
+                        data.notifications.forEach(notif => {
+                            panelHTML += `
+                                <div class="notification-item ${notif.unread ? 'unread' : ''}">
+                                    <div class="notification-icon ${notif.type}">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <h5>${notif.title}</h5>
+                                        <p>${notif.message}</p>
+                                        <span class="notification-time">${notif.time}</span>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        panelHTML += '<p style="text-align:center; padding: 20px;">Tidak ada notifikasi.</p>';
+                    }
+                    panelHTML += '</div>';
+                    panel.innerHTML = panelHTML;
+                })
+                .catch(error => console.error('Gagal mengambil notifikasi:', error));
+        }
+
+        // Event listener untuk klik lonceng
+        bell.addEventListener('click', (e) => {
+            e.stopPropagation();
+            panel.classList.toggle('show');
+
+            // Jika panel terbuka dan ada notifikasi belum dibaca, tandai sudah dibaca
+            if (panel.classList.contains('show') && parseInt(countBadge.textContent) > 0) {
+                fetch('mark_notifications_read.php', { method: 'POST' })
+                .then(() => {
+                    // Hilangkan badge setelah 1 detik
+                    setTimeout(() => {
+                        countBadge.style.display = 'none';
+                        countBadge.textContent = '0';
+                    }, 1000);
+                });
+            }
+        });
+
+        // Tutup panel jika klik di luar
+        window.addEventListener('click', () => {
+            if (panel.classList.contains('show')) {
+                panel.classList.remove('show');
+            }
+        });
+        
+        // Panggil fungsi saat halaman dimuat
+        fetchNotifications();
+        // Cek notifikasi baru setiap 1 menit
+        setInterval(fetchNotifications, 60000);
     </script>
 </body>
 </html>

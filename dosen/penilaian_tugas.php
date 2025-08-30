@@ -16,6 +16,7 @@ $pdo = $database->getConnection();
 $sql = "SELECT s.submission_id, s.tanggal_dikumpulkan, s.status as submission_status, s.score,
                u.full_name as student_name,
                a.title as assignment_title,
+               a.due_date,
                c.nama_matkul
         FROM submission s
         JOIN users u ON s.id_mahasiswa = u.user_id
@@ -48,14 +49,23 @@ $pending_count = $stmt_pending->fetch(PDO::FETCH_ASSOC)['total'];
 <body>
     <?php include 'sidebar_dosen.html'; ?>
 
-    <div class="main-content">
+     <div class="main-content">
         <header class="header">
             <h1>Penilaian Tugas</h1>
             <p style="color: #6c757d;">Lihat dan nilai tugas yang telah dikumpulkan oleh mahasiswa.</p>
         </header>
 
         <div class="section">
-            <h2 class="section-title">Tugas Terkumpul</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                 <h2 class="section-title">Tugas Terkumpul</h2>
+            </div>
+           
+            <div class="filter-container">
+                <button class="filter-btn active" onclick="filterSubmissions('all')">Semua</button>
+                <button class="filter-btn" onclick="filterSubmissions('on-time')">Tepat Waktu</button>
+                <button class="filter-btn" onclick="filterSubmissions('late')">Terlambat</button>
+            </div>
+
              <div style="overflow-x: auto;">
                 <table class="data-table">
                     <thead>
@@ -68,23 +78,32 @@ $pending_count = $stmt_pending->fetch(PDO::FETCH_ASSOC)['total'];
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="submissionsTableBody">
                         <?php if (empty($submissions)): ?>
                             <tr><td colspan="6" style="text-align: center;">Belum ada tugas yang dikumpulkan.</td></tr>
                         <?php else: ?>
                             <?php foreach ($submissions as $sub): ?>
-                                <tr>
+                                <?php
+                                    // Tentukan status keterlambatan
+                                    $submission_time = strtotime($sub['tanggal_dikumpulkan']);
+                                    $due_time = strtotime($sub['due_date']);
+                                    $is_late = $submission_time > $due_time;
+                                ?>
+                                <tr data-submission-status="<?php echo $is_late ? 'late' : 'on-time'; ?>">
                                     <td><?php echo htmlspecialchars($sub['student_name']); ?></td>
                                     <td><?php echo htmlspecialchars($sub['assignment_title']); ?></td>
                                     <td><?php echo htmlspecialchars($sub['nama_matkul']); ?></td>
-                                    <td><?php echo date('d M Y, H:i', strtotime($sub['tanggal_dikumpulkan'])); ?></td>
+                                    <td>
+                                        <?php echo date('d M Y, H:i', $submission_time); ?>
+                                        <?php if ($is_late): ?>
+                                            <span style="color: #dc3545; font-size: 12px; display: block;">(Terlambat)</span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td>
                                         <?php if ($sub['submission_status'] == 'submitted'): ?>
                                             <span class="status-badge status-belum-dinilai">Belum Dinilai</span>
                                         <?php elseif($sub['submission_status'] == 'graded'): ?>
                                             <span class="status-badge status-dinilai">Sudah Dinilai (<?php echo $sub['score']; ?>)</span>
-                                        <?php else: ?>
-                                            <span class="status-badge status-terlambat">Terlambat</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
@@ -98,9 +117,31 @@ $pending_count = $stmt_pending->fetch(PDO::FETCH_ASSOC)['total'];
             </div>
         </div>
     </div>
+
     <script>
         document.getElementById('nav-penilaian').classList.add('active');
         document.getElementById('nav-dashboard').classList.remove('active');
+
+         // --- SCRIPT UNTUK FILTER ---
+        function filterSubmissions(status) {
+            const tableBody = document.getElementById('submissionsTableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update tampilan tombol
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Lakukan filter pada setiap baris tabel
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                if (status === 'all' || row.dataset.submissionStatus === status) {
+                    row.style.display = ''; // Tampilkan baris
+                } else {
+                    row.style.display = 'none'; // Sembunyikan baris
+                }
+            }
+        }
     </script>
 </body>
 </html>
