@@ -288,10 +288,12 @@ body {
     background-color: #f8f9fa;
     font-weight: 700;
     color: var(--primary-color);
+    font-size: 12px;
 }
 
 .data-table tbody tr:nth-child(even) {
     background-color: #fdfdfd;
+    font-size: 12px;
 }
 
 .data-table tbody tr:hover {
@@ -725,4 +727,96 @@ body {
 .notification-time {
     font-size: 11px;
     color: #999;
+}
+
+
+/* === CSS Untuk Tampilan Mobile (Responsive) === */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1001; 
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .data-table th, .data-table td {
+        font-size: 13px;
+        padding: 10px 8px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    /* Menampilkan tombol menu di mobile */
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1002;
+        background: #051F20;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* Sembunyikan tombol di desktop */
+    .mobile-menu-btn {
+        display: none;
+    }
+}
+
+/* Tampilkan tombol hanya di mobile */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+}
+
+/* --- CSS untuk Layout Halaman Profil --- */
+.profile-layout {
+    display: grid;
+    /* Atur 2 kolom untuk tampilan desktop */
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Saat layar kecil (di bawah 992px), ubah menjadi 1 kolom */
+@media (max-width: 992px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
 }

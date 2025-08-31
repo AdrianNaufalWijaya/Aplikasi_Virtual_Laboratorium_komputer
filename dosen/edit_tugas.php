@@ -86,6 +86,7 @@ $courses = $stmt_courses->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <body>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_dosen.html'; ?>
 
     <div class="main-content">
@@ -150,5 +151,8 @@ $courses = $stmt_courses->fetchAll(PDO::FETCH_ASSOC);
             <?php endif; ?>
         </div>
     </div>
+
+    <script src="dosen.js"></script>
+
 </body>
 </html>

@@ -195,10 +195,7 @@ $pendingEnrollments = getPendingEnrollments($pdo, $user_id);
     <link rel="stylesheet" href="mahasiswa.css">
 </head>
 <body>
-    <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-    </button>
-
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_mahasiswa.html'; ?>
 
     <div class="main-content">
@@ -475,6 +472,6 @@ $pendingEnrollments = getPendingEnrollments($pdo, $user_id);
             });
         }, 5000);
     </script>
-    <script src="sidebar.js"></script>
+    <script src="mahasiswa.js"></script>
 </body>
 </html>

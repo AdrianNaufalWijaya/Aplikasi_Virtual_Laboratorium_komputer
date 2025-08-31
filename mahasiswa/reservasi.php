@@ -104,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="mahasiswa.css">
 </head>
 <body>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_mahasiswa.html'; ?>
     <div class="main-content">
         <div class="top-nav">
@@ -184,6 +185,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
-    <script src="sidebar.js"></script>
+    <script src="mahasiswa.js"></script>
 </body>
 </html>

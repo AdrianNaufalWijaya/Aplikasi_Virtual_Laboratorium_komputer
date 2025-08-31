@@ -65,6 +65,7 @@ $pending_count = $stmt_pending->fetch(PDO::FETCH_ASSOC)['total'];
     <link rel="stylesheet" href="dosen.css">
 </head>
 <body>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_dosen.html'; ?>
     <div class="main-content">
         <header class="header">
@@ -132,6 +133,9 @@ $pending_count = $stmt_pending->fetch(PDO::FETCH_ASSOC)['total'];
             </div>
         </div>
     </div>
+
+    <script src="dosen.js"></script>
+
     <script>
         document.getElementById('nav-tugas').classList.add('active');
     </script>

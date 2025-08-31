@@ -154,7 +154,6 @@ if (!empty($gradedSubmissions)) {
 </head>
 <body>
     <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-
     <?php include 'sidebar_mahasiswa.html'; ?>
 
     <div class="main-content">
@@ -303,7 +302,7 @@ if (!empty($gradedSubmissions)) {
         </div>
     </div>
 
-    <script src="sidebar.js"></script>
+    <script src="mahasiswa.js"></script>
     <script>
         function openTab(evt, tabName) {
             document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));

@@ -127,7 +127,6 @@ $userStats = getUserStats($pdo, $user_id);
 </head>
 <body>
     <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-
     <?php include 'sidebar_mahasiswa.html'; ?>
 
     <div class="main-content">
@@ -164,7 +163,7 @@ $userStats = getUserStats($pdo, $user_id);
         </div>
 
         <div class="content-area">
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+            <div class="profile-layout">
                 <div>
                     <div class="section mb-20">
                         <div class="d-flex align-items-center gap-15">
@@ -235,7 +234,7 @@ $userStats = getUserStats($pdo, $user_id);
         </div>
     </div>
 
-    <script src="sidebar.js"></script>
+    <script src="mahasiswa.js"></script>
     <script>
         // Auto-hide alerts after 5 seconds
         setTimeout(function() {

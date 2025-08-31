@@ -145,6 +145,7 @@ if (!$assignment) {
     <link rel="stylesheet" href="mahasiswa.css">
 </head>
 <body>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_mahasiswa.html'; ?>
     <div class="main-content">
         <div class="top-nav">
@@ -217,7 +218,9 @@ if (!$assignment) {
             </div>
         </div>
     </div>
-    
+
+    <script src="mahasiswa.js"></script>
+
     <script>
         // Fixed JavaScript untuk Drag & Drop
         const dropArea = document.getElementById('drop-area');

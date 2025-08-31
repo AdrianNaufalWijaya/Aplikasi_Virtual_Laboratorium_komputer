@@ -178,7 +178,7 @@ if ($conn) {
     <link href="admin.css" rel="stylesheet">
 </head>
 <body>
-    
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_admin.php'; ?>
 
     <div class="main-content">

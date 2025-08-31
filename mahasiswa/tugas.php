@@ -249,7 +249,6 @@ $assignmentsByStatus = getAssignmentsByStatus($allAssignments);
 </head>
 <body>
     <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-
     <?php include 'sidebar_mahasiswa.html'; ?>
     
     <div class="main-content">
@@ -451,7 +450,7 @@ $assignmentsByStatus = getAssignmentsByStatus($allAssignments);
     <div id="uploadModal" class="modal">
         </div>
 
-    <script src="sidebar.js"></script>
+    <script src="mahasiswa.js"></script>
 
     <script>
     // Fungsi untuk menampilkan modal upload

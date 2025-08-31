@@ -101,6 +101,7 @@ $materials = $stmt_materials->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="dosen.css">
 </head>
 <body>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_dosen.html'; ?>
 
     <div class="main-content">
@@ -171,5 +172,8 @@ $materials = $stmt_materials->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+
+    <script src="dosen.js"></script>
+    
 </body>
 </html>

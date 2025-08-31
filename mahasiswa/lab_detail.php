@@ -155,7 +155,7 @@ if (!$labDetails) {
             </div>
         </div>
     </div>
-    <script src="sidebar.js"></script>
+    <script src="mahasiswa.js"></script>
     <script>
         function startSession(computerId) {
             alert('Mengalihkan ke sesi untuk komputer ID: ' + computerId);

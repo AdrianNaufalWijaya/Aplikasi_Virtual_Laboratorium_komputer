@@ -43,6 +43,6 @@ if (ini_get("session.use_cookies")) {
 }
 
     
-header('Location: /Aplikasi_Virtual_Laboratorium/login.php?logout=success');
+header('Location: login.php?logout=success');
 exit();
 ?>

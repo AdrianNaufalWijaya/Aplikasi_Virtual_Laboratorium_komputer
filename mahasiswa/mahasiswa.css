@@ -2440,3 +2440,35 @@ body {
         .btn-primary { background-color: #007bff; color: white; }
         .btn-secondary { background-color: #6c757d; color: white; margin-right: 10px; }
         .btn:hover { opacity: 0.9; }
+
+
+        /* --- CSS untuk Layout Halaman Profil --- */
+.profile-layout {
+    display: grid;
+    /* Atur 2 kolom untuk tampilan desktop */
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Saat layar kecil (di bawah 992px), ubah menjadi 1 kolom */
+@media (max-width: 992px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- CSS untuk Layout Dashboard Utama --- */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Atur 2 kolom untuk desktop */
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Saat layar kecil (di bawah 768px), ubah menjadi 1 kolom */
+@media (max-width: 768px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+}

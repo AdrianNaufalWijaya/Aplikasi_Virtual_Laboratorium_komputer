@@ -111,6 +111,7 @@ if (!$submission) {
     </style>
 </head>
 <body>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_dosen.html'; ?>
 
     <div class="main-content">
@@ -202,6 +203,8 @@ if (!$submission) {
             </div>
         </div>
     </div>
+
+    <script src="dosen.js"></script>
 
     <script>
         const scoreInput = document.getElementById('score');

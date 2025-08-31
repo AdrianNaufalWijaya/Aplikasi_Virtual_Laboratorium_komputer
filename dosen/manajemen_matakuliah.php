@@ -44,6 +44,7 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <body>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_dosen.html'; ?>
     <div class="main-content">
         <header class="header">
@@ -88,6 +89,9 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+
+    <script src="dosen.js"></script>
+
     <script>
         document.getElementById('nav-matkul').classList.add('active');
     </script>

@@ -379,10 +379,7 @@ $averageGrade = $stats['average_grade'];
     <link rel="stylesheet" href="mahasiswa.css">
 </head>
 <body>
-    <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-    </button>
-
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_mahasiswa.html' ?>
    
     <div class="main-content">
@@ -542,7 +539,7 @@ $averageGrade = $stats['average_grade'];
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+            <div class="dashboard-layout">
                 <div class="section">
                     <h2 class="section-title">
                         <i class="fas fa-tasks"></i>
@@ -610,6 +607,6 @@ $averageGrade = $stats['average_grade'];
         </div>
     </div>
 
-    <script src="sidebar.js"></script>
+    <script src="mahasiswa.js"></script>
 </body>
 </html>

@@ -93,6 +93,7 @@ foreach ($laboratories as $lab) {
     <link rel="stylesheet" href="mahasiswa.css">
 </head>
 <body>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <?php include 'sidebar_mahasiswa.html'; ?>
 
     <div class="main-content">
@@ -177,7 +178,7 @@ foreach ($laboratories as $lab) {
         </div>
     </div>
 
-    <script src="sidebar.js"></script>
+    <script src="mahasiswa.js"></script>
 
     <script>
     // Pastikan tab "Reservasi Aktif" menjadi default saat halaman dimuat
