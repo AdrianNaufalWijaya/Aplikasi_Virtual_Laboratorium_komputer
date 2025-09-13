@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = 'sql211.infinityfree.com';
-    private $db_name = 'if0_39828337_virtual_laboratory_db';
-    private $username = 'if0_39828337';
-    private $password = 'Bandung0921';
+    private $host = 'localhost';
+    private $db_name = 'virtual_laboratory_db';
+    private $username = 'root';
+    private $password = '';
     public $conn;
 
     public function getConnection() {
